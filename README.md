@@ -133,7 +133,7 @@ plt.scatter(
 
 ### Figure 1 - Informasi Dataset
 
-![Figure 1](figure1.png)
+![Figure 1](Figure1.png)
 
 Keterangan:
 
@@ -141,7 +141,7 @@ Menampilkan informasi dataset menggunakan fungsi `info()` untuk mengetahui jumla
 
 ### Figure 2 - Visualisasi Hasil Clustering
 
-![Figure 2](figure2.png)
+![Figure 2](Figure2.png)
 
 Keterangan:
 
