@@ -1,158 +1,191 @@
-# K-Means Clustering pada Dataset GPS Trajectories dan TLC New Driver Application Status
+K-Means Clustering pada Dataset GPS Trajectories
+Deskripsi
 
-## Deskripsi
+Proyek ini merupakan implementasi algoritma K-Means Clustering menggunakan dataset GPS Trajectories dari UCI Machine Learning Repository. Tujuan dari proyek ini adalah mengelompokkan data perjalanan berdasarkan karakteristik yang dimiliki sehingga data dengan karakteristik yang mirip berada pada cluster yang sama.
 
-Proyek ini merupakan implementasi algoritma K-Means Clustering pada dua dataset yang berbeda, yaitu GPS Trajectories dan TLC New Driver Application Status. Tujuan dari proyek ini adalah mempelajari penerapan algoritma K-Means untuk mengelompokkan data berdasarkan karakteristik yang dimiliki sehingga data yang memiliki kemiripan dapat berada pada cluster yang sama.
+Dataset
 
-## Dataset
+Dataset yang digunakan:
 
-### Dataset 1: GPS Trajectories
-
-Dataset ini berisi informasi perjalanan yang direkam menggunakan GPS.
-
-* Nama Dataset : GPS Trajectories
-* Sumber : UCI Machine Learning Repository
+Nama Dataset : GPS Trajectories
+Sumber : https://archive.ics.uci.edu/dataset/354/gps+trajectories
 
 File yang digunakan:
 
-```text
 go_track_tracks.csv
-```
 
-Fitur yang digunakan:
-
-* Distance
-* Speed
-
----
-
-### Dataset 2: TLC New Driver Application Status
-
-Dataset ini berisi informasi status pengajuan calon pengemudi.
-
-* Nama Dataset : TLC New Driver Application Status
-* Sumber : Kaggle
-
-File yang digunakan:
-
-```text
-TLC_New_Driver_Application_Status.csv
-```
-
-Fitur yang digunakan:
-
-* Type
-* Status
-
-## Library yang Digunakan
-
-```python
+Library yang Digunakan
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 from sklearn.cluster import KMeans
-from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import MinMaxScaler
-```
 
-## Tahapan Pengerjaan
+Tahapan Pengerjaan
+1. Import Library
 
-### 1. Import Library
+Mengimpor library yang diperlukan untuk membaca data, melakukan preprocessing, visualisasi, dan clustering.
 
-Mengimpor library yang diperlukan untuk proses clustering.
+2. Membaca Dataset
 
-### 2. Membaca Dataset
+Dataset dibaca menggunakan Pandas dan dikonversi ke dalam bentuk DataFrame.
 
-Dataset dibaca menggunakan Pandas dan dikonversi menjadi DataFrame.
+3. Melihat Informasi Dataset
 
-### 3. Data Cleaning
+Melihat struktur data, jumlah atribut, tipe data, dan jumlah data yang tersedia.
 
-* Dataset GPS Trajectories: menghapus kolom yang tidak digunakan.
-* Dataset TLC: menghapus kolom App No.
+4. Data Cleaning
 
-### 4. Data Preprocessing
+Kolom linha dihapus karena tidak digunakan dalam proses clustering.
 
-* Dataset GPS Trajectories menggunakan data numerik secara langsung.
-* Dataset TLC menggunakan Label Encoding untuk mengubah data kategorikal menjadi numerik.
+5. Pemilihan Fitur
 
-### 5. Konversi Data ke Array
+Fitur yang digunakan untuk proses clustering adalah:
 
-Data yang digunakan untuk clustering dikonversi menjadi array NumPy.
+Distance
+Speed
+6. Konversi Data ke Array
 
-### 6. Normalisasi Data
+Data yang telah dipilih dikonversi menjadi array NumPy agar dapat diproses oleh algoritma K-Means.
 
-Normalisasi dilakukan menggunakan Min-Max Scaling.
+7. Normalisasi Data
 
-### 7. Penentuan Jumlah Cluster
+Normalisasi dilakukan menggunakan Min-Max Scaling untuk menyamakan rentang nilai setiap fitur.
 
-Jumlah cluster ditentukan menggunakan metode Elbow.
+8. Pembuatan Model K-Means
 
-### 8. Pembuatan dan Pelatihan Model K-Means
+Model K-Means dibuat dengan jumlah cluster sebanyak 3.
 
-Model K-Means dilatih menggunakan data yang telah dinormalisasi.
+9. Pelatihan Model
 
-### 9. Hasil Clustering
+Model dilatih menggunakan data yang telah dinormalisasi.
 
-Data berhasil dikelompokkan ke dalam beberapa cluster berdasarkan karakteristik masing-masing dataset.
+10. Hasil Clustering
 
-## Dokumentasi
+Label cluster ditambahkan ke dataset sehingga setiap data memiliki informasi cluster masing-masing.
 
-### Dataset GPS Trajectories
+Dokumentasi
+Figure 1 - Dataset Awal
 
-#### Figure 1 - Dataset Awal
+Menampilkan sebagian isi dataset yang digunakan pada proses clustering.
 
-Menampilkan data sebelum proses clustering dilakukan.
+Figure 2 - Informasi Dataset
 
-#### Figure 2 - Informasi Dataset
+Menampilkan informasi dataset seperti jumlah data, jumlah atribut, dan tipe data setiap kolom.
 
-Menampilkan struktur dan tipe data dataset.
+Figure 3 - DataFrame Setelah Preprocessing
 
-#### Figure 3 - Data Setelah Preprocessing
+Menampilkan dataset setelah dilakukan pembersihan data dan pemilihan atribut yang digunakan untuk clustering.
 
-Menampilkan data yang telah dibersihkan dan siap diproses.
+Figure 4 - Hasil Konversi ke Array
 
-#### Figure 4 - Konversi ke Array
+Menampilkan hasil konversi data dari DataFrame menjadi array NumPy yang akan digunakan pada proses normalisasi dan clustering.
 
-Menampilkan hasil konversi data ke array NumPy.
+Figure 5 - Hasil Evaluasi
 
-#### Figure 5 - Hasil Evaluasi
+Menampilkan hasil evaluasi yang diperoleh selama proses praktikum sesuai langkah pada modul yang digunakan.
 
-Menampilkan hasil clustering dan evaluasi model.
+Hasil
+
+Berdasarkan implementasi algoritma K-Means Clustering, data berhasil dikelompokkan ke dalam beberapa cluster berdasarkan kemiripan karakteristik perjalanan. Hasil clustering dapat digunakan untuk membantu analisis pola perjalanan pengguna berdasarkan atribut yang tersedia pada dataset.
+
+Kesimpulan
+
+Algoritma K-Means Clustering berhasil diterapkan pada dataset GPS Trajectories. Proses clustering dilakukan melalui tahapan preprocessing, normalisasi data, pelatihan model, dan analisis hasil cluster. Hasil yang diperoleh menunjukkan bahwa data dapat dikelompokkan berdasarkan karakteristik yang serupa sehingga memudahkan proses analisis data perjalanan.
+
+# K-Means Clustering pada Dataset TLC New Driver Application Status
+
+## Deskripsi Dataset
+
+Dataset yang digunakan adalah **TLC New Driver Application Status** yang berisi informasi status pengajuan calon pengemudi. Dataset terdiri dari beberapa atribut seperti:
+
+* Type
+* App Date
+* Status
+* FRU Interview Scheduled
+* Drug Test
+* WAV Course
+* Defensive Driving
+* Driver Exam
+* Medical Clearance Form
+* Other Requirements
+* Last Updated
+
+Karena sebagian besar atribut bertipe kategorikal, dilakukan proses encoding agar data dapat diproses menggunakan algoritma K-Means.
 
 ---
 
-### Dataset TLC New Driver Application Status
+## Tahap 1: Data Encoding
 
-#### Figure 1 - Dataset Awal
+Pada tahap ini seluruh atribut kategorikal diubah menjadi bentuk numerik menggunakan metode **Label Encoding**. Tujuannya adalah agar setiap kategori dapat direpresentasikan dalam bentuk angka sehingga dapat diproses oleh algoritma clustering.
 
-Menampilkan visualisasi data sebelum clustering.
+**Dokumentasi:**
 
-#### Figure 2 - Informasi Dataset
+![Data Encoding](dataencoding.png)
 
-Menampilkan struktur dataset dan tipe data.
+Hasil encoding menunjukkan bahwa seluruh atribut kategorikal berhasil dikonversi menjadi data numerik.
 
-#### Figure 3 - Data Setelah Encoding
+---
 
-Menampilkan hasil Label Encoding pada seluruh atribut kategorikal.
+## Tahap 2: Visualisasi Dataset Awal
 
-#### Figure 4 - Hasil Clustering
+Sebelum proses clustering dilakukan, data divisualisasikan terlebih dahulu menggunakan scatter plot untuk melihat persebaran data awal.
 
-Menampilkan hasil pengelompokan data menggunakan K-Means beserta centroid.
+**Dokumentasi:**
 
-#### Figure 5 - Jumlah Data Tiap Cluster
+![Dataset Awal](Figure_1.png)
 
-Menampilkan distribusi jumlah data pada masing-masing cluster.
+Pada visualisasi tersebut seluruh data masih berada dalam satu kelompok dan belum memiliki label cluster.
 
-## Hasil
+---
 
-Implementasi K-Means Clustering berhasil diterapkan pada kedua dataset. Hasil clustering menunjukkan bahwa data dapat dikelompokkan berdasarkan karakteristik yang serupa sehingga memudahkan proses analisis dan interpretasi data.
+## Tahap 3: Penentuan Jumlah Cluster dengan Metode Elbow
+
+Metode Elbow digunakan untuk menentukan jumlah cluster yang optimal dengan melihat nilai WCSS (Within Cluster Sum of Squares).
+
+**Dokumentasi:**
+
+![Metode Elbow](Figure_2.png)
+
+Dari grafik Elbow dapat ditentukan jumlah cluster yang digunakan dalam proses K-Means Clustering.
+
+---
+
+## Tahap 4: Proses K-Means Clustering
+
+Setelah jumlah cluster ditentukan, algoritma K-Means dijalankan untuk mengelompokkan data berdasarkan kemiripan karakteristik masing-masing data.
+
+Setiap data akan ditempatkan ke cluster yang memiliki jarak terdekat terhadap centroid.
+
+Centroid kemudian diperbarui secara iteratif hingga posisi centroid stabil dan tidak mengalami perubahan signifikan.
+
+---
+
+## Tahap 5: Hasil Clustering
+
+Hasil clustering menunjukkan bahwa data berhasil dikelompokkan ke dalam beberapa cluster yang berbeda. Setiap warna merepresentasikan cluster yang berbeda, sedangkan tanda centroid menunjukkan pusat masing-masing cluster.
+
+---
+
+## Tahap 6: Jumlah Data pada Setiap Cluster
+
+Setelah proses clustering selesai, dilakukan perhitungan jumlah data yang berada pada masing-masing cluster.
+
+**Dokumentasi:**
+
+![Jumlah Cluster](jumlahcluster.png)
+
+Hasil tersebut menunjukkan distribusi data pada setiap cluster yang terbentuk.
+
+---
 
 ## Kesimpulan
 
-Algoritma K-Means Clustering berhasil diterapkan pada dataset GPS Trajectories dan TLC New Driver Application Status. Meskipun kedua dataset memiliki karakteristik yang berbeda, proses preprocessing dan clustering mampu menghasilkan kelompok data yang dapat digunakan untuk analisis lebih lanjut.
+Berdasarkan hasil implementasi algoritma K-Means Clustering pada dataset TLC New Driver Application Status, data berhasil dikelompokkan ke dalam beberapa cluster berdasarkan karakteristik yang dimiliki. Proses preprocessing berupa Label Encoding diperlukan karena dataset mengandung banyak atribut kategorikal. Hasil clustering dapat digunakan untuk melakukan analisis lebih lanjut terhadap pola pengajuan dan status calon pengemudi.
 
-## Author
+Author
 
 Nama : Nazwa Zalfa
 
