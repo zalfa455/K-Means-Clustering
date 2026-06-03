@@ -1,15 +1,15 @@
 # K-Means Clustering pada Dataset GPS Trajectories
 
-## Deskripsi Proyek
+## Deskripsi
 
-Proyek ini merupakan implementasi algoritma K-Means Clustering menggunakan dataset GPS Trajectories dari UCI Machine Learning Repository. Tujuan dari proyek ini adalah mengelompokkan data perjalanan berdasarkan karakteristik tertentu seperti jarak tempuh (*distance*) dan kecepatan (*speed*).
+Proyek ini merupakan implementasi algoritma K-Means Clustering menggunakan dataset GPS Trajectories dari UCI Machine Learning Repository. Tujuan dari proyek ini adalah mengelompokkan data perjalanan berdasarkan karakteristik yang dimiliki sehingga data dengan karakteristik yang mirip berada pada cluster yang sama.
 
 ## Dataset
 
-Dataset yang digunakan berasal dari UCI Machine Learning Repository:
+Dataset yang digunakan:
 
-* Dataset: GPS Trajectories
-* Sumber: https://archive.ics.uci.edu/dataset/354/gps+trajectories
+* Nama Dataset : GPS Trajectories
+* Sumber : https://archive.ics.uci.edu/dataset/354/gps+trajectories
 
 File yang digunakan:
 
@@ -22,8 +22,8 @@ go_track_tracks.csv
 ```python
 import pandas as pd
 import numpy as np
-import seaborn as sns
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import MinMaxScaler
@@ -31,126 +31,99 @@ from sklearn.preprocessing import MinMaxScaler
 
 ## Tahapan Pengerjaan
 
-### 1. Membaca Dataset
+### 1. Import Library
 
-Dataset dibaca menggunakan library Pandas dan dikonversi menjadi DataFrame.
+Mengimpor library yang diperlukan untuk membaca data, melakukan preprocessing, visualisasi, dan clustering.
 
-```python
-baca = pd.read_csv("go_track_tracks.csv")
-baca.head()
-```
+### 2. Membaca Dataset
 
-### 2. Melihat Informasi Dataset
+Dataset dibaca menggunakan Pandas dan dikonversi ke dalam bentuk DataFrame.
 
-Melihat struktur data, jumlah kolom, tipe data, dan jumlah data.
+### 3. Melihat Informasi Dataset
 
-```python
-baca.info()
-```
+Melihat struktur data, jumlah atribut, tipe data, dan jumlah data yang tersedia.
 
-### 3. Menghapus Kolom yang Tidak Digunakan
+### 4. Data Cleaning
 
 Kolom `linha` dihapus karena tidak digunakan dalam proses clustering.
 
-```python
-baca = baca.drop(["linha"], axis=1)
-```
+### 5. Pemilihan Fitur
 
-### 4. Memilih Variabel Clustering
+Fitur yang digunakan untuk proses clustering adalah:
 
-Variabel yang digunakan:
+* Distance
+* Speed
 
-* distance
-* speed
+### 6. Konversi Data ke Array
 
-```python
-baca_x = baca.iloc[:,1:3]
-```
-
-### 5. Visualisasi Persebaran Data
-
-Visualisasi dilakukan untuk melihat pola persebaran data sebelum clustering.
-
-```python
-plt.scatter(
-    baca.distance,
-    baca.speed
-)
-plt.show()
-```
-
-### 6. Mengubah Data Menjadi Array
-
-Data DataFrame dikonversi menjadi array NumPy.
-
-```python
-x_array = np.array(baca_x)
-```
+Data yang telah dipilih dikonversi menjadi array NumPy agar dapat diproses oleh algoritma K-Means.
 
 ### 7. Normalisasi Data
 
-Normalisasi dilakukan menggunakan Min-Max Scaling agar seluruh fitur berada pada rentang yang sama.
-
-```python
-scaler = MinMaxScaler()
-x_scaled = scaler.fit_transform(x_array)
-```
+Normalisasi dilakukan menggunakan Min-Max Scaling untuk menyamakan rentang nilai setiap fitur.
 
 ### 8. Pembuatan Model K-Means
 
 Model K-Means dibuat dengan jumlah cluster sebanyak 3.
 
-```python
-kmeans = KMeans(
-    n_clusters=3,
-    random_state=42
-)
+### 9. Pelatihan Model
 
-kmeans.fit(x_scaled)
-```
+Model dilatih menggunakan data yang telah dinormalisasi.
 
-### 9. Menambahkan Label Cluster
+### 10. Hasil Clustering
 
-Hasil cluster ditambahkan ke dalam dataset.
-
-```python
-baca["cluster"] = kmeans.labels_
-```
-
-### 10. Visualisasi Hasil Clustering
-
-Visualisasi cluster dan centroid hasil K-Means.
-
-```python
-plt.scatter(
-    x_scaled[:,0],
-    x_scaled[:,1],
-    c=kmeans.labels_
-)
-```
+Label cluster ditambahkan ke dataset sehingga setiap data memiliki informasi cluster masing-masing.
 
 ## Dokumentasi
 
-### Figure 1 - Informasi Dataset
+### Figure 1 - Dataset Awal
 
 ![Figure 1](Figure1.png)
 
-Keterangan:
+Menampilkan sebagian isi dataset yang digunakan pada proses clustering.
 
-Menampilkan informasi dataset menggunakan fungsi `info()` untuk mengetahui jumlah data, tipe data, dan struktur dataset.
+---
 
-### Figure 2 - Visualisasi Hasil Clustering
+### Figure 2 - Informasi Dataset
 
 ![Figure 2](Figure2.png)
 
-Keterangan:
+Menampilkan informasi dataset seperti jumlah data, jumlah atribut, dan tipe data setiap kolom.
 
-Menampilkan hasil pengelompokan data menggunakan algoritma K-Means Clustering beserta centroid masing-masing cluster.
+---
+
+### Figure 3 - DataFrame Setelah Preprocessing
+
+![DataFrame](dataframe.png)
+
+Menampilkan dataset setelah dilakukan pembersihan data dan pemilihan atribut yang digunakan untuk clustering.
+
+---
+
+### Figure 4 - Hasil Konversi ke Array
+
+![Data Array](dataarray.png)
+
+Menampilkan hasil konversi data dari DataFrame menjadi array NumPy yang akan digunakan pada proses normalisasi dan clustering.
+
+---
+
+### Figure 5 - Hasil Evaluasi
+
+![F1 Score](F1score.png)
+
+Menampilkan hasil evaluasi yang diperoleh selama proses praktikum sesuai langkah pada modul yang digunakan.
 
 ## Hasil
 
-Berdasarkan proses clustering menggunakan algoritma K-Means, data perjalanan berhasil dikelompokkan ke dalam tiga cluster berdasarkan kemiripan karakteristik perjalanan. Hasil clustering dapat digunakan untuk menganalisis pola perjalanan pengguna berdasarkan jarak dan kecepatan.
+Berdasarkan implementasi algoritma K-Means Clustering, data berhasil dikelompokkan ke dalam beberapa cluster berdasarkan kemiripan karakteristik perjalanan. Hasil clustering dapat digunakan untuk membantu analisis pola perjalanan pengguna berdasarkan atribut yang tersedia pada dataset.
 
 ## Kesimpulan
 
-Algoritma K-Means Clustering berhasil diterapkan pada dataset GPS Trajectories. Dengan melakukan normalisasi data dan pengelompokan berdasarkan fitur yang dipilih, diperoleh beberapa kelompok data yang memiliki karakteristik perjalanan yang serupa.
+Algoritma K-Means Clustering berhasil diterapkan pada dataset GPS Trajectories. Proses clustering dilakukan melalui tahapan preprocessing, normalisasi data, pelatihan model, dan analisis hasil cluster. Hasil yang diperoleh menunjukkan bahwa data dapat dikelompokkan berdasarkan karakteristik yang serupa sehingga memudahkan proses analisis data perjalanan.
+
+## Author
+
+Nama : Nazwa Zalfa
+
+Mata Kuliah : Data Mining / Machine Learning
