@@ -126,4 +126,4 @@ Algoritma K-Means Clustering berhasil diterapkan pada dataset GPS Trajectories. 
 
 Nama : Nazwa Zalfa
 
-Mata Kuliah : Data Mining / Machine Learning
+Mata Kuliah : Pembelajaran Mesin
